@@ -1944,12 +1944,12 @@ static int process_in(mdns_daemon_t *d, int sd)
 	inet_addr_t from;
 	socklen_t ssize = sizeof(from);
 	ssize_t bsize;
-    int rc;
 
 	memset(buf, 0, sizeof(buf));
 
 	while ((bsize = recvfrom(sd, buf, MAX_PACKET_LEN, MSG_DONTWAIT, (struct sockaddr *)&from, &ssize)) > 0) {
-		memset((void*)&m, 0, sizeof(struct message));
+		int rc;
+        memset((void*)&m, 0, sizeof(struct message));
 
 		buf[MAX_PACKET_LEN] = 0;
 		mdnsd_log_hex("Got Data:", buf, bsize);
